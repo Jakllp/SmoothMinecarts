@@ -417,14 +417,14 @@ public class TrainCarts extends PluginBase {
         //Load configuration
         loadConfig();
 
-        //update max item stack
+        /*update max item stack
         if (TCConfig.maxMinecartStackSize != 1) {
             for (Material material : MaterialsByName.getAllMaterials()) {
                 if (MaterialUtil.ISMINECART.get(material)) {
                     Util.setItemMaxSize(material, TCConfig.maxMinecartStackSize);
                 }
             }
-        }
+        } */
 
         //Initialize entity glow color provider
         this.glowColorTeamProvider = new GlowColorTeamProvider(this);
@@ -588,14 +588,14 @@ public class TrainCarts extends PluginBase {
         Task.stop(cacheCleanupTask);
         Task.stop(mutexZoneUpdateTask);
 
-        //update max item stack
+        /*update max item stack
         if (TCConfig.maxMinecartStackSize != 1) {
             for (Material material : MaterialsByName.getAllMaterials()) {
                 if (MaterialUtil.ISMINECART.get(material)) {
                     Util.setItemMaxSize(material, 1);
                 }
             }
-        }
+        } */
 
         //this corrects minecart positions before saving
         MinecartGroupStore.doPostMoveLogic();

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Chunk;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -392,6 +393,7 @@ public abstract class MinecartMember<T extends CommonMinecart<?>> extends Entity
      * @return orientation
      */
     public Quaternion getOrientation() {
+    	//MARKED FOR CHANGING
         if (entity.loc.getYaw() != this.cachedOrientation_yaw) {
             this.cachedOrientation_yaw = entity.loc.getYaw();
             this.cachedOrientation_quat = null;
@@ -401,7 +403,7 @@ public abstract class MinecartMember<T extends CommonMinecart<?>> extends Entity
             this.cachedOrientation_quat = null;
         }
         if (this.cachedOrientation_quat == null) {
-            this.cachedOrientation_quat = Quaternion.fromYawPitchRoll(this.cachedOrientation_pitch,
+            this.cachedOrientation_quat = Quaternion.fromYawPitchRoll(0.0f,
                     this.cachedOrientation_yaw + 90.0f, 0.0f);
         }
         return this.cachedOrientation_quat.clone();
@@ -2225,9 +2227,9 @@ public abstract class MinecartMember<T extends CommonMinecart<?>> extends Entity
      * @return roll angle
      */
     public double getRoll() {
-        double result = this.roll;
+    	// MARKED FOR REMOVAL
         // TODO: Integrate shaking direction / shaking power into this roll value
-        return result + getWheels().getBankingRoll();
+        return 0.0;
     }
 
     /**

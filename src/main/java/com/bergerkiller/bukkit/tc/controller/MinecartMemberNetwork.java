@@ -482,14 +482,6 @@ public class MinecartMemberNetwork extends EntityNetworkController<CommonMinecar
     public void tickSelf() {
         this.getRootAttachment();
 
-        if (TCConfig.animationsUseTickTime) {
-            this.animationDeltaTime = 1.0 / 20.0;
-        } else {
-            long time_now = System.currentTimeMillis();
-            this.animationDeltaTime = 0.001 * (double) (time_now - this.animationCurrentTime);
-            this.animationCurrentTime = time_now;
-        }
-
         try (Timings t = TCTimings.NETWORK_UPDATE_POSITIONS.start()) {
             HelperMethods.updatePositions(this.rootAttachment, getLiveTransform());
         }
