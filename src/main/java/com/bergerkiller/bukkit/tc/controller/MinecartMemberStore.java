@@ -1,28 +1,10 @@
 package com.bergerkiller.bukkit.tc.controller;
 
-import com.bergerkiller.bukkit.common.bases.IntVector3;
-import com.bergerkiller.bukkit.common.collections.ClassMap;
-import com.bergerkiller.bukkit.common.controller.DefaultEntityController;
-import com.bergerkiller.bukkit.common.controller.DefaultEntityNetworkController;
-import com.bergerkiller.bukkit.common.controller.EntityNetworkController;
-import com.bergerkiller.bukkit.common.conversion.Conversion;
-import com.bergerkiller.bukkit.common.entity.CommonEntity;
-import com.bergerkiller.bukkit.common.entity.CommonEntityType;
-import com.bergerkiller.bukkit.common.entity.type.*;
-import com.bergerkiller.bukkit.common.utils.*;
-import com.bergerkiller.bukkit.common.wrappers.HumanHand;
-import com.bergerkiller.bukkit.tc.TCConfig;
-import com.bergerkiller.bukkit.tc.TrainCarts;
-import com.bergerkiller.bukkit.tc.cache.RailMemberCache;
-import com.bergerkiller.bukkit.tc.controller.components.RailPiece;
-import com.bergerkiller.bukkit.tc.controller.type.*;
-import com.bergerkiller.bukkit.tc.events.MemberSpawnEvent;
-import com.bergerkiller.bukkit.tc.properties.CartProperties;
-import com.bergerkiller.bukkit.tc.rails.type.RailType;
-import com.bergerkiller.bukkit.tc.storage.OfflineGroupManager;
-import com.bergerkiller.bukkit.tc.utils.PaperRedstonePhysicsChecker;
-import com.bergerkiller.mountiplex.conversion.annotations.ConverterMethod;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
+import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -32,9 +14,44 @@ import org.bukkit.entity.Minecart;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import com.bergerkiller.bukkit.common.bases.IntVector3;
+import com.bergerkiller.bukkit.common.collections.ClassMap;
+import com.bergerkiller.bukkit.common.controller.DefaultEntityController;
+import com.bergerkiller.bukkit.common.controller.DefaultEntityNetworkController;
+import com.bergerkiller.bukkit.common.controller.EntityNetworkController;
+import com.bergerkiller.bukkit.common.conversion.Conversion;
+import com.bergerkiller.bukkit.common.entity.CommonEntity;
+import com.bergerkiller.bukkit.common.entity.CommonEntityType;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartChest;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartCommandBlock;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartFurnace;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartHopper;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartMobSpawner;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartRideable;
+import com.bergerkiller.bukkit.common.entity.type.CommonMinecartTNT;
+import com.bergerkiller.bukkit.common.utils.BlockUtil;
+import com.bergerkiller.bukkit.common.utils.EntityUtil;
+import com.bergerkiller.bukkit.common.utils.ItemUtil;
+import com.bergerkiller.bukkit.common.utils.LogicUtil;
+import com.bergerkiller.bukkit.common.utils.WorldUtil;
+import com.bergerkiller.bukkit.common.wrappers.HumanHand;
+import com.bergerkiller.bukkit.tc.TCConfig;
+import com.bergerkiller.bukkit.tc.TrainCarts;
+import com.bergerkiller.bukkit.tc.cache.RailMemberCache;
+import com.bergerkiller.bukkit.tc.controller.components.RailPiece;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberChest;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberCommandBlock;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberFurnace;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberHopper;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberMobSpawner;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberRideable;
+import com.bergerkiller.bukkit.tc.controller.type.MinecartMemberTNT;
+import com.bergerkiller.bukkit.tc.events.MemberSpawnEvent;
+import com.bergerkiller.bukkit.tc.properties.CartProperties;
+import com.bergerkiller.bukkit.tc.rails.type.RailType;
+import com.bergerkiller.bukkit.tc.storage.OfflineGroupManager;
+import com.bergerkiller.bukkit.tc.utils.PaperRedstonePhysicsChecker;
+import com.bergerkiller.mountiplex.conversion.annotations.ConverterMethod;
 
 public abstract class MinecartMemberStore {
     private static ClassMap<Class<?>> controllers = new ClassMap<>();
@@ -86,9 +103,7 @@ public abstract class MinecartMemberStore {
         if (!canConvert(minecart)) {
             return false; // Base logic
         }
-        if (!TCConfig.allMinecartsAreTrainCarts && !OfflineGroupManager.containsMinecart(minecart.getUniqueId())) {
-            return false; // Not a known Traincarts Minecart, and the option to auto-convert all is disabled
-        }
+        Bukkit.getConsoleSender().sendMessage("Will convert");
         return true;
     }
 

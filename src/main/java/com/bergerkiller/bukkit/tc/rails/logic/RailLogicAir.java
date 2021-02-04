@@ -8,6 +8,7 @@ import com.bergerkiller.bukkit.tc.TCConfig;
 import com.bergerkiller.bukkit.tc.controller.MinecartMember;
 import com.bergerkiller.bukkit.tc.properties.standard.type.SlowdownMode;
 
+import org.bukkit.Bukkit;
 import org.bukkit.block.BlockFace;
 import org.bukkit.util.Vector;
 
@@ -73,12 +74,8 @@ public class RailLogicAir extends RailLogic {
                 forward.setY(dy);
                 forward.setZ(dz);
             }
-        } else if (!member.getGroup().getProperties().isSlowingDown(SlowdownMode.GRAVITY)) {
-            // When gravity is disabled, keep the original orientation of the Minecart.
-            // This allows other plugins to freely control the 3d position and orientation
-            // of the Minecart without movement changes causing disruptions.
-            forward.multiply(0.0);
         }
+        forward.multiply(0.0);
 
         if (forward.lengthSquared() <= 1e-8) {
             // Forward vector is useless, just use the old quaternion

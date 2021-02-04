@@ -11,6 +11,7 @@ import com.bergerkiller.bukkit.tc.controller.MinecartMember;
 import com.bergerkiller.bukkit.tc.controller.components.RailPath;
 import com.bergerkiller.bukkit.tc.controller.components.RailState;
 
+import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.util.Vector;
@@ -272,6 +273,9 @@ public abstract class RailLogic {
      */
     public void onGravity(MinecartMember<?> member, double gravityFactorSquared) {
         CommonMinecart<?> e = member.getEntity();
+        if(e.hasPassenger()) {
+        	return;
+        }
         Block block = member.getRailTracker().getBlock();
         RailPath.Segment segment = getPath().findSegment(e.loc.vector(), block);
         if (segment == null) {

@@ -1,4 +1,4 @@
-name: Smooth_Minecarts
+name: SmoothMinecarts
 main: com.bergerkiller.bukkit.tc.TrainCarts
 api-version: 1.13
 version: ${project.version}

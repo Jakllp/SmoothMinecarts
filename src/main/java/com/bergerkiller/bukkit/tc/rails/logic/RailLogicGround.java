@@ -1,5 +1,9 @@
 package com.bergerkiller.bukkit.tc.rails.logic;
 
+import org.bukkit.Bukkit;
+import org.bukkit.block.BlockFace;
+import org.bukkit.util.Vector;
+
 import com.bergerkiller.bukkit.common.entity.CommonEntity;
 import com.bergerkiller.bukkit.common.entity.type.CommonMinecart;
 import com.bergerkiller.bukkit.common.math.Quaternion;
@@ -7,9 +11,6 @@ import com.bergerkiller.bukkit.common.utils.FaceUtil;
 import com.bergerkiller.bukkit.common.utils.MathUtil;
 import com.bergerkiller.bukkit.tc.TCConfig;
 import com.bergerkiller.bukkit.tc.controller.MinecartMember;
-
-import org.bukkit.block.BlockFace;
-import org.bukkit.util.Vector;
 
 /**
  * Handles the rail logic of a minecart sliding on the ground
@@ -39,6 +40,9 @@ public class RailLogicGround extends RailLogic {
     @Override
     public void onGravity(MinecartMember<?> member, double gravityFactorSquared) {
         CommonMinecart<?> e = member.getEntity();
+        if(e.hasPassenger()) {
+        	return;
+        }
         e.vel.y.subtract(gravityFactorSquared * getGravityMultiplier(member));
     }
 
