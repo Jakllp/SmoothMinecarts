@@ -103,7 +103,7 @@ public abstract class MinecartMemberStore {
         if (!canConvert(minecart)) {
             return false; // Base logic
         }
-        Bukkit.getConsoleSender().sendMessage("Will convert");
+        //Bukkit.getConsoleSender().sendMessage("Will convert");
         return true;
     }
 
