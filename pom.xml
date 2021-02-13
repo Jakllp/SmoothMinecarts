@@ -18,7 +18,7 @@
         <project.bkcversion>1.16.4-v3-SNAPSHOT</project.bkcversion>
         <project.slversion>1.11.2-v2-SNAPSHOT</project.slversion>
         <project.mwversion>1.11.2-v2-SNAPSHOT</project.mwversion>
-        <junit.version>4.11</junit.version>
+        <junit.version>LATEST</junit.version>
     </properties>
 
     <profiles>

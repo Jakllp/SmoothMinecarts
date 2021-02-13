@@ -321,20 +321,20 @@ public class VirtualEntity {
         // Only applies when used in a minecart member network environment
         liveVel = 0.0;
         if (this.entityTypeIsMinecart && this.manager instanceof MinecartMemberNetwork) {
-            MinecartMember<?> member = ((MinecartMemberNetwork) manager).getMember();
-            if (!member.isUnloaded() && member.getGroup().getProperties().isSoundEnabled() && !member.isDerailed()) {
-                if (!Double.isNaN(velSyncAbsX)) {
-                    liveVel = MathUtil.distance(liveAbsX, liveAbsY, liveAbsZ, velSyncAbsX, velSyncAbsY, velSyncAbsZ);
-                }
-                velSyncAbsX = liveAbsX;
-                velSyncAbsY = liveAbsY;
-                velSyncAbsZ = liveAbsZ;
-
-                // Limit to a maximum of 1.0, above this it's kind of pointless
-                if (liveVel > 1.0) liveVel = 1.0;
-
-                // Audio cutoff
-                if (liveVel < 0.001) liveVel = 0.0;
+        	MinecartMember<?> member = ((MinecartMemberNetwork) manager).getMember();
+            if (!member.isUnloaded()) {
+	            if (!Double.isNaN(velSyncAbsX)) {
+	                liveVel = MathUtil.distance(liveAbsX, liveAbsY, liveAbsZ, velSyncAbsX, velSyncAbsY, velSyncAbsZ);
+	            }
+	            velSyncAbsX = liveAbsX;
+	            velSyncAbsY = liveAbsY;
+	            velSyncAbsZ = liveAbsZ;
+	
+	            // Limit to a maximum of 1.0, above this it's kind of pointless
+	            if (liveVel > 1.0) liveVel = 1.0;
+	
+	            // Audio cutoff
+	            if (liveVel < 0.001) liveVel = 0.0;
             }
         }
     }
